@@ -125,6 +125,12 @@ def create_recipe():
 def recipe_detail(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
     return render_template('recipe_detail.html',recipe=recipe)
+    
+@app.route('/my_recipes')
+@login_required
+def my_recipes():
+    my_recipes = Recipe.query.filter_by(user_id=current_user.id)
+    return render_template('my_recipes.html',recipes=my_recipes)
 
 with app.app_context():
     db.create_all()
