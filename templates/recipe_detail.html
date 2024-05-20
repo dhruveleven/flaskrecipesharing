@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/main.css')}}"
+    />
+    <title>{{ recipe.title }}</title>
+  </head>
+  <body>
+    <h1>{{recipe.title}}</h1>
+    <h2>Chef Name:</h2>
+    <p>{{ recipe.chef_name }}</p>
+    <h2>Cuisine:</h2>
+    <p>{{ recipe.cuisine }}</p>
+    <h2>Ingredients</h2>
+    <ul>
+      {% for ingredient in recipe.ingredients.splitlines() %}
+      <li>{{ ingredient }}</li>
+      {% endfor %}
+    </ul>
+    <h2>Instructions</h2>
+    <ol>
+      {% for instruction in recipe.instructions.splitlines() %}
+      <li>{{ instruction }}</li>
+      {% endfor %}
+    </ol>
+
+    <div>
+      <a href="/recipes"
+        ><button class="buttondesign" id="recipes-buttons">
+          Back to Recipes
+        </button></a
+      >
+      <a href="/logout"
+        ><button class="buttondesign" id="recipes-buttons">Logout</button></a
+      >
+    </div>
+  </body>
+</html>

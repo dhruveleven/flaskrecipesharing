@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/main.css')}}"
+    />
+    <title>Create Recipe</title>
+  </head>
+  <body>
+    <h1>Create Recipe</h1>
+    <form action="/recipe/create" method="POST">
+      <div class="center-container">
+        <div>
+          <div>
+            <label for="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              class="recipe-title-input"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="chef_name">Chef Name:</label>
+            <input
+              type="text"
+              id="chef_name"
+              name="chef_name"
+              class="recipe-chef-input"
+              required
+            />
+          </div>
+          <div>
+            <label for="cuisine">Cuisine:</label>
+            <input
+              type="text"
+              id="cuisine"
+              name="cuisine"
+              class="recipe-cuisine-input"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="ingredients">Ingredients</label>
+            <textarea
+              id="ingredients"
+              name="ingredients"
+              rows="4"
+              class="recipe-cuisine-input"
+              required
+            ></textarea>
+          </div>
+          <div>
+            <label for="instructions">Instructions</label>
+            <textarea
+              id="instructions"
+              name="instructions"
+              rows="8"
+              class="recipe-cuisine-input"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="buttondesign" id="recipes-buttons">Create Recipe</button>
+        </div>
+      </div>
+    </form>
+    <div>
+      <a href="/options"
+        ><button class="buttondesign" id="recipes-buttons">Back to Options</button></a
+      >
+    </div>
+  </body>
+</html>

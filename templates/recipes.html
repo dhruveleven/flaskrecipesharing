@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/main.css')}}"
+    />
+    <title>Recipes</title>
+  </head>
+  <body>
+    <h1>All Recipes</h1>
+    <form action="{{ url_for('recipes') }}" method="get">
+      <div class="center-container">
+        <div class="form-group">
+          <label for="q" class="searchlabel" style="font-weight: bold"
+            >Enter keyword:
+          </label>
+          <input
+            type="text"
+            name="q"
+            value="{{ request.args.get('q', '') }}"
+            class="search-input"
+          />
+        </div>
+      </div>
+      <button type="submit" class="buttondesign" id="recipes-buttons">
+        Search
+      </button>
+    </form>
+    <ul>
+      {% for recipe in recipes %}
+      <li class="list-center">
+        <a href="{{ url_for('recipe_detail', recipe_id=recipe.id) }}"
+          >{{ recipe.title }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+    <div>
+      <a href="/options"
+        ><button class="buttondesign" id="recipes-buttons">
+          Back to Options
+        </button></a
+      >
+      <a href="/logout"
+        ><button class="buttondesign" id="recipes-buttons">Logout</button></a
+      >
+    </div>
+  </body>
+</html>

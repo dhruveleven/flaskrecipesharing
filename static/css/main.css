@@ -1,0 +1,134 @@
+body{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    align-items: center;
+    font-size: 18px;
+}
+
+#home-buttons{
+    margin: 10px;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+}
+
+#home-buttons:hover{
+    background-color: black;
+    color: white;
+    transform: scale(0.95);
+}
+
+#login-buttons{
+    margin: 10px;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+}
+
+#login-buttons:hover{
+    background-color: black;
+    color: white;
+    transform: scale(0.95);
+}
+
+#options-buttons{
+    margin: 10px;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+}
+
+#options-buttons:hover{
+    background-color: black;
+    color: white;
+    transform: scale(0.95);
+}
+
+
+form{
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color:black;
+    font-weight: bold;
+}
+
+.login-input, .search-input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    text-align: center;
+    font-size: 30px;
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px; /* Adjust as necessary */
+}
+.form-group {
+    display: flex;
+    align-items: center;
+}
+.usrlabel, .passlabel, .searchlabel {
+    margin-right: 10px; /* Adjust as necessary */
+    font-size: 30px;
+}
+
+#recipes-buttons{
+    margin: 10px;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+}
+
+#recipes-buttons:hover{
+    background-color: black;
+    color: white;
+    transform: scale(0.95);
+}
+
+
+.list-center{
+    align-items: center;
+}
+
+.recipe-title-input, .recipe-chef-input, .recipe-cuisine-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    text-align: center;
+    font-size: 30px;
+    border: 2px solid black;
+    border-radius: 3px;
+
+}
+
+textarea{
+    resize: none;
+}
