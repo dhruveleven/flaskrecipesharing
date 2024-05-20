@@ -110,7 +110,7 @@ def create_recipe():
         ingredients = request.form['ingredients']
         instructions = request.form['instructions']
 
-        chef_name = request.form['chef']  # Access chef name field
+        chef_name = request.form['chef_name']  # Access chef name field
         cuisine = request.form['cuisine']  # Access cuisine field
 
         recipe = Recipe(title=title,ingredients=ingredients,instructions=instructions,chef_name=chef_name,cuisine=cuisine,user_id=current_user.id)
