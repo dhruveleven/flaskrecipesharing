@@ -12,11 +12,12 @@
         {% for recipe in recipes %}
         <li class="list-center">
             <a href="{{ url_for('recipe_detail',recipe_id=recipe.id) }}">{{ recipe.title }}</a>
+            <a href="/delete/{{recipe.id}}"><button class="buttondesign" id="recipes-buttons">Delete Recipe</button></a>
         </li>
         {% endfor %}
     </ul>
     <div>
-        <a href="{{ url_for('options') }}"><button class="buttonsdesign" id="recipes-buttons">Back to Options</button></a>
+        <a href="/recipes"><button class="buttondesign" id="recipes-buttons">Back to Recipes</button></a>
         <a href="{{ url_for('logout') }}"><button class="buttondesign" id="recipes-buttons">Logout</button></a>
     </div>
 </body>
