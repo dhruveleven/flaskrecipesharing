@@ -1,0 +1,31 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Your Liked Recipes</h1>
+    {% if recipes %}
+    <ul>
+      {% for recipe in recipes %}
+      <li class="list-center">
+        <a href="{{ url_for('recipe_detail',recipe_id=recipe.id) }}"> {{recipe.title}} </a>
+        <form action="{{ url_for('unlike_recipe',recipe_id=recipe.id) }}" method="POST">
+            <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+            <button type="submit" class="remove-button">Remove from Liked</button>
+        </form> 
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <div>
+      <a href="/recipes"><button class="buttondesign" id="recipes-buttons">Back to Recipes</button></a>
+      <a href="/logout"><button class="buttondesign" id="recipes-buttons">Logout</button></a>
+    </div>
+  </body>
+</html>
+-->
