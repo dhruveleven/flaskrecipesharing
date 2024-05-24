@@ -1,17 +1,21 @@
-from flask import Flask,render_template,request,redirect,url_for,flash
+#ALL REQUIRED IMPORTS
+from flask import Flask,render_template,request,redirect,url_for,flash,session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_user, logout_user,login_required, current_user
 from werkzeug.security import generate_password_hash,check_password_hash
+from flask_redis import FlaskRedis
 
+#INITIALIZING APP
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'abc'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///recipes.db'
+app.config['SESSION_TYPE'] = 'redis'
+app.config['SESSION_REDIS'] = FlaskRedis(host='localhost',port=6379,db=0)
 db = SQLAlchemy(app)
 
+#LOGIN
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-
 
 #USER MODEL
 class User(UserMixin,db.Model):
@@ -24,8 +28,7 @@ class User(UserMixin,db.Model):
 
     def check_password(self,password):
         return check_password_hash(self.password_hash,password)
-
-
+    
 #RECIPE MODEL
 class Recipe(db.Model):
     id = db.Column(db.Integer,primary_key=True)
@@ -48,6 +51,7 @@ def load_user(user_id):
 def index():
     return render_template('index.html')
 
+#LOGIN ROUTE
 @app.route('/login',methods=['GET','POST'])
 def login():
     if request.method == 'POST':
@@ -63,6 +67,7 @@ def login():
             return redirect(url_for('create_account'))
     return render_template('login.html')
 
+#CREATE ACCOUNT ROUTE
 @app.route('/create_account',methods=['GET','POST'])
 def create_account():
     if request.method == 'POST':
@@ -80,6 +85,7 @@ def create_account():
             return redirect(url_for('login'))
     return render_template('create_account.html')
 
+#LOGOUT ROUTE
 @app.route('/logout')
 @login_required
 def logout():
@@ -87,11 +93,13 @@ def logout():
     flash('Logged out successfully!','success')
     return redirect(url_for('index'))
 
+#OPTIONS ROUTE
 @app.route('/options')
 @login_required
 def options():
     return render_template('options.html')
 
+#RECIPES ROUTE
 @app.route('/recipes', methods=['GET', 'POST'])
 @login_required
 def recipes():
@@ -102,6 +110,7 @@ def recipes():
         recipes = Recipe.query.all()
     return render_template('recipes.html', recipes=recipes)
 
+#CREATE NEW RECIPE ROUTE
 @app.route('/recipe/create',methods=['GET','POST'])
 @login_required 
 def create_recipe():
@@ -109,10 +118,8 @@ def create_recipe():
         title = request.form['title']
         ingredients = request.form['ingredients']
         instructions = request.form['instructions']
-
-        chef_name = request.form['chef_name']  # Access chef name field
-        cuisine = request.form['cuisine']  # Access cuisine field
-
+        chef_name = request.form['chef_name'] 
+        cuisine = request.form['cuisine']
         recipe = Recipe(title=title,ingredients=ingredients,instructions=instructions,chef_name=chef_name,cuisine=cuisine,user_id=current_user.id)
         db.session.add(recipe)
         db.session.commit()
@@ -120,17 +127,38 @@ def create_recipe():
         return redirect(url_for('recipes'))
     return render_template('create_recipe.html')
 
+#RECIPE DETAILS ROUTE
 @app.route('/recipe/<int:recipe_id>')
 @login_required
 def recipe_detail(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
     return render_template('recipe_detail.html',recipe=recipe)
-    
+
+#MY_RECIPE DETAILS ROUTE
+@app.route('/myrecipedeets/<int:recipe_id>')
+@login_required
+def my_recipes_detail(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    return render_template('my_recipes_detail.html',recipe=recipe)
+
+#MY_RECIPES ROUTE
 @app.route('/my_recipes')
 @login_required
 def my_recipes():
     my_recipes = Recipe.query.filter_by(user_id=current_user.id)
     return render_template('my_recipes.html',recipes=my_recipes)
+
+#DELETE RECIPE ROUTE
+@app.route('/delete/<int:id>')
+@login_required
+def delete(id):
+    del_recipe = Recipe.query.get_or_404(id)
+    try:
+        db.session.delete(del_recipe)
+        db.session.commit()
+        return redirect('/my_recipes')
+    except:
+        return "There was an error deleting your recipe!"
 
 with app.app_context():
     db.create_all()
